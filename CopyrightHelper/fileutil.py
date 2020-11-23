@@ -25,7 +25,7 @@ def read(filename):
 
 ## Using '(C) Copyright' to check existing copyright header by default.
 def removeOldCopyright(content):
-  pattern = '(?<!:)\\/\\/.*|\\/\\*(\\s|.)*?\\*\\/'
+  pattern = '\\/\\*(\\s|.)*?\\*\\/|#{2,}(\\s|.)*?\\*?#{2,}|<!--(\\s|.)*?\\*?>'
   result = re.match(pattern, content, flags=0)
   if (result != None):
     oldCopyright = result.group()
