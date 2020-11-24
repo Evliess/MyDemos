@@ -19,7 +19,7 @@ def initUI():
     [sg.Text('Copyright Content', size=(60, 1), background_color=background_color)],
     [sg.Multiline(size=(82, 15), key='content')],
     [sg.Text('', size=(60, 2), key='message', background_color=background_color)],
-    [sg.ProgressBar(100, orientation='h', size=(46, 3), key='progressbar', bar_color=progress_bar_color)]
+    [sg.ProgressBar(100, orientation='h', size=(54, 3), key='progressbar', bar_color=progress_bar_color)]
   ]
   window = sg.Window('Copyright-Header Tool', layout, no_titlebar=False, finalize=True, background_color=background_color)
   handleWidgetEvents(window)
