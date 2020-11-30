@@ -23,12 +23,5 @@ pip3 install pysimplegui
 ## Usage
 
 ```
-py.exe .\copyright.py
+<installation_path>/py.exe .\copyright.py
 ```
-
-### References
-
-https://pysimplegui.readthedocs.io/en/latest/#install
-https://www.mojohaus.org/license-maven-plugin/
-https://www.baeldung.com/eclipse-copyright-header
-https://ftp.jaist.ac.jp/pub/eclipse/technology/epp/downloads/release/oxygen/3a/eclipse-jee-oxygen-3a-win32-x86_64.zip

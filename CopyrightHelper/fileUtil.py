@@ -4,7 +4,8 @@ import logging
 
 import logging_config
 
-logger = logging.getLogger('fileutil.py')
+
+logger = logging.getLogger('copyrightHelper')
 
 def write(filename, content):
   try:
@@ -47,23 +48,38 @@ def getSourceFiles(path):
       pass
   return sourceFiles
 
-def appendCopyrightHeader(window, sourceFiles, copyrightContent):
+def appendCopyrightHeader(window, sourceFiles, values):
   progressbar = window['progressbar']
   messageText = window['message']
+  copyrightContent = values['content']
+  selectLanguage = values['language']
+  selectLanguage = selectLanguage.lower()
   totalFiles = len(sourceFiles)
-  i = 1
+  i = 0
   try:
-    for file in sourceFiles:
-      logger.info('Update file: %s', file)
-      originalContent = read(file)
-      copyrightContent = copyrightContent.strip() + '\n'
-      originalContent = removeOldCopyright(originalContent)
-      content = copyrightContent + originalContent
-      i += 1
-      messageText.update(file)
-      progressbar.update(i, totalFiles)
-      write(file, content)
+    progressbar.update(i, totalFiles)
+    for filePath in sourceFiles:
+      if (getFileType(filePath).find(selectLanguage) != -1):
+        updateCopyright(filePath, copyrightContent)
+        messageText.update(filePath)
+        progressbar.update(i, totalFiles)
+        i += 1
     messageText.update('Done!')
+    progressbar.update(totalFiles)
   except Exception as ex:
     messageText.update('Error! Please see message.log for more details.')
-    logger.error('Add/Update copyright header to %s error! %s', file, ex)
+    logger.error('Add/Update copyright header to %s error! %s', filePath, ex)
+
+def getFileType(filePath):
+  return os.path.splitext(filePath)[-1]
+
+def updateCopyright(filePath, copyrightContent):
+  try:
+    logger.info('Update file: %s', filePath)
+    originalContent = read(filePath)
+    copyrightContent = copyrightContent.strip() + '\n'
+    originalContent = removeOldCopyright(originalContent)
+    content = copyrightContent + originalContent
+    write(filePath, content)
+  except:
+    raise   
