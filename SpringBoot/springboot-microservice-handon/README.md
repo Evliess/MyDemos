@@ -30,13 +30,6 @@ vue create .
 npm install vue-material --save
 ```
 
-- 
-
-
-## Spring Reactive Framework
-
-- WebFlux
-- WebClient
 
 ## Spring Security
 http://localhost:8080/spring/travels?userId=123  
