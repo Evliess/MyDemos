@@ -82,7 +82,7 @@
       <artifactId>client-java</artifactId>
       <groupId>io.kubernetes</groupId>
       <scope>compile</scope>
-      <version>4.0.0</version>
+      <version>9.0.2</version>
     </dependency>
 
 
