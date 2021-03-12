@@ -19,13 +19,14 @@ public class QuickSort {
       }
       //交换位置
       if (i < j) {
-        System.out.println(array[i] + "<->" + array[j]);
+        //System.out.println(array[i] + "<->" + array[j]);
         temp = array[i];
         array[i] = array[j];
         array[j] = temp;
       }
     }
-    //当i==j时，需要将array[i]的值与array[L]的值进行交换，因此引入变量i,j。如果直接使用L，R，那么当L==R的时候，base在数组中的初始位置L就会丢失。
+    //i==j时，j停止的位置一定是从右边遍历最后一个比base小的数
+    //System.out.println("i:" + i + " " + array[i] + "<->" + array[L]);
     temp = array[i];
     array[i] = array[L];
     array[L] = temp;
