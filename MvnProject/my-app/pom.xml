@@ -102,6 +102,13 @@
       <version>1.11</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.openjdk.jol</groupId>
+      <artifactId>jol-core</artifactId>
+      <version>0.14</version>
+      <scope>test</scope>
+    </dependency>
+
 
   </dependencies>
 

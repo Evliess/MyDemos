@@ -11,7 +11,7 @@ public class SemaphoreTestCase {
   public void test() {
     int threadCount = 200;
     ExecutorService exec = Executors.newCachedThreadPool();
-    final Semaphore semaphore = new Semaphore(3);
+    final Semaphore semaphore = new Semaphore(10);
     for (int i = 0; i < threadCount; i++) {
       final int threadNum = i;
       exec.execute(() -> {
