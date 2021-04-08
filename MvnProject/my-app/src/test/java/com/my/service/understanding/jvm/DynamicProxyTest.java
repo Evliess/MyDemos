@@ -8,14 +8,14 @@ public class DynamicProxyTest {
 
   interface IHello {
 
-    void sayHello();
+    void sayHello(String name);
   }
 
   static class Hello implements IHello {
 
     @Override
-    public void sayHello() {
-      System.out.println("hello, world!");
+    public void sayHello(String name) {
+      System.out.println("hello, world!" + name);
     }
   }
 
@@ -38,6 +38,6 @@ public class DynamicProxyTest {
 
   public static void main(String[] args) {
     IHello iHello = (IHello) new DynamicProxy().bind(new Hello());
-    iHello.sayHello();
+    iHello.sayHello("Java");
   }
 }
