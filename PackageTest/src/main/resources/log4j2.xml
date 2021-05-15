@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{DATE} %logger{36} [%-5level] [%thread]: %msg%n"/>
+        </Console>
+        <Routing name="Routing">
+            <Routes pattern="$${ctx:routingKey}">
+                <!-- This route is chosen if ThreadContext has no value for key ROUTINGKEY. -->
+                <Route key="$${ctx:routingKey}">
+                    <RollingFile name="Rolling-default" fileName="logs/default.log"
+                                 filePattern="./logs/${date:yyyy-MM}/default-%d{yyyy-MM-dd}-%i.log.gz">
+                        <PatternLayout>
+                            <pattern>%d{ISO8601} [%t] %p %c{3} - %m%n</pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="10 MB"/>
+                        </Policies>
+                    </RollingFile>
+                </Route>
+                <!-- This route is chosen if ThreadContext has a value for ROUTINGKEY -->
+                <Route>
+                    <RollingFile name="Rolling-${ctx:routingKey}" fileName="${ctx:logFileName}"
+                                 filePattern="${ctx:logFileName}.%i">
+                        <PatternLayout pattern="%d{DATE} %logger{36} [%-5level] [%thread]: %msg%n"/>
+                        <Policies>
+                            <SizeBasedTriggeringPolicy size="1 MB"/>
+                        </Policies>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.springframework" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="springfox.documentation" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.hibernate" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="com.zaxxer.hikari" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.apache.http" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.apache.activemq" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.quartz" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.thymeleaf" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.eclipse.jetty" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="com.ulisesbocchio.jasyptspringboot" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="org.drools" level="warn" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="com.ibm.websphere.bpm" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Routing"/>
+        </Root>
+    </Loggers>
+</Configuration>
