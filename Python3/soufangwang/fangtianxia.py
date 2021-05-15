@@ -11,7 +11,7 @@ from requests.exceptions import HTTPError
 
 
 __city = 'sh'
-__years = 3
+__years = 5
 __geckodriverPath = r'./drivers//geckodriver.exe'
 __url = 'https://fangjia.fang.com/fangjia/suggestion/transfer/' + __city
 

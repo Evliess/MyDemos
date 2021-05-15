@@ -40,13 +40,14 @@ def __createIndexHtml(jsonData, dataChengjiao):
     write('./frontend/index.html', htmlContent)
 
 def getInfo():
-    areas = ['华沙一村', '园西一居', '临丰小区', '青夏小区', '上浦小区', '沙田公寓']
+    areas = ['华沙一村', '园西一居', '临丰小区', '青夏小区', '上浦小区', '临河小区']
     dataAvg = getAvgPrice(areas)
     areaNames = {
         'shangpuxiaoqu' : '上浦小区',
         'huashayicun' : '华沙一村',
         'yuanxierju' : '园西一居',
         'linfengxiaoqu' : '临丰小区',
+        'linhexiaoqu' : '临河小区',
         'qingxiaxiaoqu2' : '青夏小区'
         
     }
