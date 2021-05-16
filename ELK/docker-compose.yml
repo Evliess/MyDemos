@@ -1,0 +1,87 @@
+version: '2.2'
+services:
+  nginx:
+    build:
+      context: nginx/
+    container_name: nginx
+    ports:
+      - 8080:80
+    volumes:
+      #Logs are mounted to a relative path. These are also accessed by Filebeat
+      - .\logs\nginx\:/var/log/nginx
+    networks:
+      - elastic
+
+  es01:
+    build:
+      context: elasticsearch/
+    container_name: es01
+    environment:
+      - node.name=es01
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      #Use named volume so es data is persisted across restart
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.0
+    container_name: kibana
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://es01:9200"
+    ports:
+      - 5601:5601
+    networks:
+      - elastic
+    depends_on:
+      - es01
+
+  filebeat:
+    build:
+      context: filebeat/
+    container_name: filebeat
+    entrypoint: "filebeat -e -strict.perms=false"
+    environment:
+      - ELASTICSEARCH_HOSTS=["es01:9200"]
+      - KIBANA_HOST=kibana:5601
+    volumes:
+      - .\logs\nginx\:/var/log/nginx
+      - //var/run/docker.sock:/var/run/docker.sock 
+    networks:
+      - elastic
+    depends_on:
+      - es01
+      - kibana
+
+  metricbeat:
+    build: 
+      context: metricbeat/
+    container_name: metricbeat
+    entrypoint: "metricbeat -e -strict.perms=false"
+    environment:
+      - ELASTICSEARCH_HOSTS=["es01:9200"]
+      - KIBANA_HOST=kibana:5601
+    volumes:
+      - //var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - elastic
+    depends_on:
+      - es01
+      - kibana
+      - nginx
+
+volumes:
+  data01:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
