@@ -1,33 +1,40 @@
 package com.my.service.interview;
 
+import org.junit.Test;
+
+
+//Fibonacci sequence
 public class DP1 {
 
-
-  public static void main(String[] args) {
-    //fun1(5);
-    fun(5);
-    fun(4);
-  }
-
-  static void fun1(int n) {
-    int a = 0, b = 1, sum = 0, i;
-    for (i = 0; i < n; i++) {
-      sum = a + b;
-      a = b;
-      b = sum;
+  //递归的解法
+  public int fib1(int n) {
+    if (n == 0 | n == 1) {
+      return 1;
+    } else {
+      return fib1(n - 1) + fib1(n - 2);
     }
-    System.out.println(sum);
   }
 
-
-  static void fun(int n) {
-    int[] fn = new int[n];
-    fn[0] = 1;
-    fn[1] = 1;
-    for (int i = 2; i < n; i++) {
-      fn[i] = fn[i - 1] + fn[i - 2];
+  //备忘录的解法
+  public int fib2(int memo[], int n) {
+    if (n >= 2) {
+      memo[n] = fib2(memo, n - 1) + fib2(memo, n - 2);
+      return memo[n];
+    } else {
+      return 1;
     }
-    int res = fn[n - 1];
-    System.out.println(res);
   }
+
+  @Test
+  public void fib1_t() {
+    System.out.println(fib1(2));
+  }
+
+  @Test
+  public void fib2_t() {
+    int n = 2;
+    int memo[] = new int[n + 1];
+    System.out.println(fib2(memo, 2));
+  }
+
 }

@@ -37,9 +37,9 @@ public class MyThreadTestCase {
   @Test
   public void threadLocal() {
     final ThreadLocal<NumberFormat> currencyFormat = ThreadLocal
-        .withInitial(() -> NumberFormat.getCompactNumberInstance());
+        .withInitial(() -> NumberFormat.getNumberInstance());
 
-    final NumberFormat format = NumberFormat.getCompactNumberInstance();
+    final NumberFormat format = NumberFormat.getNumberInstance();
     for (int i = 0; i < 100; i++) {
       new Thread(() -> {
         Double r = Math.random() * 100000.01;
