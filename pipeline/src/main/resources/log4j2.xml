@@ -20,8 +20,8 @@
                 </Route>
                 <!-- This route is chosen if ThreadContext has a value for ROUTINGKEY -->
                 <Route>
-                    <RollingFile name="Rolling-${ctx:routingKey}" fileName="${ctx:logFileName}"
-                                 filePattern="${ctx:logFileName}.%i">
+                    <RollingFile name="Rolling-${ctx:routingKey}" fileName="logs/${ctx:routingKey}.log"
+                                 filePattern="${ctx:routingKey}.%i">
                         <PatternLayout pattern="%d{DATE} %logger{36} [%-5level] [%thread]: %msg%n"/>
                         <Policies>
                             <SizeBasedTriggeringPolicy size="1 MB"/>
