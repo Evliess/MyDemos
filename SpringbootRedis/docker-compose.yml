@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:latest
+    restart: always
+
+  spring-redis:
+    depends_on:
+      - redis
+    image: waitplay/spring-redis:1.0.0
+    ports:
+      - "9080:9080"
+    restart: always
+    environment:
+      SERVER_PORT: 9080
+      REDIS_HOST: redis
+      REDIS_PORT: 6379

@@ -1,0 +1,13 @@
+server.port: ${SERVER_PORT}
+spring.redis.host: ${REDIS_HOST}
+spring.redis.port: ${REDIS_PORT}
+#客户端超时
+spring.redis.timeout: 10000
+#最大连接数
+spring.redis.lettuce.pool.max-active: 20
+#最小空闲
+spring.redis.lettuce.pool.min-idle: 5
+#连接超时
+spring.redis.lettuce.pool.max-wait: 5000ms
+#最大空闲
+spring.redis.lettuce.pool.max-idle: 20
