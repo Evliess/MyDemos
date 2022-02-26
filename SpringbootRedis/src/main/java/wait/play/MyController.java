@@ -1,11 +1,16 @@
 package wait.play;
 
+import org.apache.logging.log4j.core.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @RestController
@@ -34,5 +39,11 @@ public class MyController {
     String value = redisTemplate.opsForValue().get(name).toString();
     logger.info("{}:{}", name, value);
     return "hello! {" + name + " : " + value + "}";
+  }
+
+  @RequestMapping(value = "/hello/config", method = RequestMethod.GET)
+  public String readConfig() throws FileNotFoundException {
+    File file = Paths.get("config/test.conf").toFile();
+    return file.exists() + "";
   }
 }
