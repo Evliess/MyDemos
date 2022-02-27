@@ -19,3 +19,7 @@ curl -d 'key=hello' -d 'value=world' -X POST  http://localhost:9080/greeting
 curl http://localhost:9080/hello/hello
 ```
 
+## Package
+
+[spring-boot-assembly](https://github.com/geekidea/spring-boot-assembly)
+
