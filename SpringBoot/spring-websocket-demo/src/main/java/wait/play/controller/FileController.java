@@ -22,53 +22,55 @@ import wait.play.service.FileService;
 @Controller
 public class FileController {
 
-	@Autowired
-	private FileService fileService;
+  @Autowired
+  private FileService fileService;
 
-	@RequestMapping(value = { "/file" })
-	public String listFiles(Model model) {
-		fileService.setPath("files");
-		List<MyFile> files = fileService.getFiles();
-		model.addAttribute("files", files);
-		return "file";
+  private final String PATH = "D:\\迅雷下载";
 
-	}
+  @RequestMapping(value = {"/file"})
+  public String listFiles(Model model) {
+    fileService.setPath(PATH);
+    List<MyFile> files = fileService.getFiles();
+    model.addAttribute("files", files);
+    return "file";
 
-	@RequestMapping(value = "/file/download/{folderName}/{fileName:.+}", method = RequestMethod.GET)
-	public ResponseEntity<InputStreamResource> download(@PathVariable("fileName") String fileName,
-			@PathVariable("folderName") String folderName) throws IOException {
-		File f = new File("files");
-		FileSystemResource file = new FileSystemResource(
-				f.getAbsolutePath() + File.separator + folderName + File.separator + fileName);
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-		headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));
-		headers.add("Pragma", "no-cache");
-		headers.add("Expires", "0");
-		return ResponseEntity.ok().headers(headers).contentLength(file.contentLength())
-				.contentType(MediaType.parseMediaType("application/octet-stream"))
-				.body(new InputStreamResource(file.getInputStream()));
-	}
+  }
 
-	@RequestMapping(value = "/file/del/{folderName}/{fileName:.+}", method = RequestMethod.GET)
-	public String del(@PathVariable("fileName") String fileName, @PathVariable("folderName") String folderName,
-			Model model) throws IOException {
-		File f = new File("files");
-		
-		File file = new File(f.getAbsolutePath() + File.separator + folderName + File.separator + fileName);
-		if (file.exists()) {
-			file.delete();
-		}
-		
-		File parent = new File(f.getAbsolutePath() + File.separator + folderName);
-		if (parent.exists()) {
-			parent.delete();
-		}
-		
-		fileService.setPath("files");
-		List<MyFile> files = fileService.getFiles();
-		model.addAttribute("files", files);
-		return "file";
-	}
+  @RequestMapping(value = "/file/download/{folderName}/{fileName:.+}", method = RequestMethod.GET)
+  public ResponseEntity<InputStreamResource> download(@PathVariable("fileName") String fileName,
+                                                      @PathVariable("folderName") String folderName) throws IOException {
+    File f = new File(PATH);
+    FileSystemResource file = new FileSystemResource(
+        f.getAbsolutePath() + File.separator + fileName);
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+    headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));
+    headers.add("Pragma", "no-cache");
+    headers.add("Expires", "0");
+    return ResponseEntity.ok().headers(headers).contentLength(file.contentLength())
+        .contentType(MediaType.parseMediaType("application/octet-stream"))
+        .body(new InputStreamResource(file.getInputStream()));
+  }
+
+  @RequestMapping(value = "/file/del/{folderName}/{fileName:.+}", method = RequestMethod.GET)
+  public String del(@PathVariable("fileName") String fileName, @PathVariable("folderName") String folderName,
+                    Model model) throws IOException {
+    File f = new File(PATH);
+
+    File file = new File(f.getAbsolutePath() + File.separator + fileName);
+    if (file.exists()) {
+      file.delete();
+    }
+
+    File parent = new File(f.getAbsolutePath() + File.separator + folderName);
+    if (parent.exists()) {
+      parent.delete();
+    }
+
+    fileService.setPath(PATH);
+    List<MyFile> files = fileService.getFiles();
+    model.addAttribute("files", files);
+    return "file";
+  }
 
 }

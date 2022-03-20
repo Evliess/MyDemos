@@ -1,0 +1,9 @@
+kubectl apply -f - <<EOF
+apiVersion: "demo.fabric8.io/v1"
+kind: Dummy
+metadata:
+  name: dummy-0316
+spec:
+  foo: "foo"
+  bar: "bar"
+EOF
