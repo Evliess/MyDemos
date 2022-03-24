@@ -21,12 +21,10 @@ import java.util.List;
 
 public class CRDSample {
   private static Logger logger = LoggerFactory.getLogger(CRDSample.class);
-  private static final String MASTER_URL = "http://192.168.88.128:8001";
-
 
   public static void main(String[] args) {
     final ConfigBuilder configBuilder = new ConfigBuilder();
-    configBuilder.withMasterUrl(MASTER_URL);
+    configBuilder.withMasterUrl(Constants.MASTER_URL);
 
     try (KubernetesClient client = new DefaultKubernetesClient(configBuilder.build())) {
       CustomResourceDefinitionList crds = client.apiextensions().v1().customResourceDefinitions().list();

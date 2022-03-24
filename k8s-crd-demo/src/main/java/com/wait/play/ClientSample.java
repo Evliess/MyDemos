@@ -11,11 +11,10 @@ import java.util.Optional;
 
 public class ClientSample {
   private static Logger logger = LoggerFactory.getLogger(ClientSample.class);
-  private static final String MASTER_URL = "http://192.168.88.128:8001";
 
   public static void main(String[] args) {
     final ConfigBuilder configBuilder = new ConfigBuilder();
-    configBuilder.withMasterUrl(MASTER_URL);
+    configBuilder.withMasterUrl(Constants.MASTER_URL);
     Config config = configBuilder.build();
 
     try (KubernetesClient client = new DefaultKubernetesClient(config)) {
