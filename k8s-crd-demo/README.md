@@ -15,6 +15,7 @@ docker volume prune -f
 
 minikube start
 #must enable --disable-filter=true
+#Expose k8s api server
 kubectl proxy --address='0.0.0.0' --accept-hosts='^*$' --disable-filter=true &
 
 
