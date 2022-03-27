@@ -33,7 +33,7 @@ public class ExecWithTerminalSizeSample {
         .readingInput(System.in)
         .writingOutput(System.out)
         .writingError(System.err)
-//        .withTTY()
+        .withTTY()
         .usingListener(new SimpleListener())
         .exec("env", "TERM=xterm", "COLUMNS=" + columns, "LINES=" + lines, "sh", "-c", "df -h");
   }

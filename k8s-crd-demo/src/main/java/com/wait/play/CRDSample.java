@@ -36,14 +36,14 @@ public class CRDSample {
         ObjectMeta metadata = crd.getMetadata();
         if (metadata != null) {
           String name = metadata.getName();
-          System.out.println("    " + name + " => " + metadata.getSelfLink());
+          logger.info("    " + name + " => " + metadata.getSelfLink());
           if (dummyCRDName.equals(name)) {
             dummyCRD = crd;
           }
         }
       }
       if (dummyCRD != null) {
-        System.out.println("Found CRD: " + dummyCRD.getMetadata().getSelfLink());
+        logger.info("Found CRD: " + dummyCRD.getMetadata().getSelfLink());
       } else {
         dummyCRD = CustomResourceDefinitionContext.v1CRDFromCustomResourceType(Dummy.class)
             .editSpec()
@@ -65,7 +65,7 @@ public class CRDSample {
             .build();
 
         client.apiextensions().v1().customResourceDefinitions().create(dummyCRD);
-        System.out.println("Created CRD " + dummyCRD.getMetadata().getName());
+        logger.info("Created CRD " + dummyCRD.getMetadata().getName());
 
         // wait a beat for the endpoints to be ready
         Thread.sleep(5000);
@@ -78,9 +78,9 @@ public class CRDSample {
         }
         CustomResourceList<Dummy> dummyList = dummyClient.list();
         List<Dummy> items = dummyList.getItems();
-        System.out.println("  found " + items.size() + " dummies");
+        logger.info("  found " + items.size() + " dummies");
         for (Dummy item : items) {
-          System.out.println("    " + item);
+          logger.info("    " + item);
         }
 
         Dummy dummy = new Dummy();
@@ -95,17 +95,17 @@ public class CRDSample {
 
         Dummy created = dummyClient.createOrReplace(dummy);
 
-        System.out.println("Upserted " + dummy);
+        logger.info("Upserted " + dummy);
 
         created.getSpec().setBar("otherBar");
 
         dummyClient.createOrReplace(created);
 
-        System.out.println("Watching for changes to Dummies");
+        logger.info("Watching for changes to Dummies");
         dummyClient.withResourceVersion(created.getMetadata().getResourceVersion()).watch(new Watcher<Dummy>() {
           @Override
           public void eventReceived(Action action, Dummy resource) {
-            System.out.println("==> " + action + " for " + resource);
+            logger.info("==> " + action + " for " + resource);
             if (resource.getSpec() == null) {
               logger.error("No Spec for resource {}", resource);
             }

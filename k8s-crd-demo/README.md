@@ -14,14 +14,17 @@ minikube delete
 docker volume prune -f
 
 minikube start
-#must enable --disable-filter=true
+#Must enable --disable-filter=true
 #Expose k8s api server
 kubectl proxy --address='0.0.0.0' --accept-hosts='^*$' --disable-filter=true &
 
-
+#Expose service
 kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-service
 
+#Generate ClusterIP
 minikube tunnel --cleanup &
+
+
 ```
 
 ## Use Nginx proxy NodeIP:port
@@ -45,7 +48,7 @@ server {
       
     location / {
         #minikube ip:NodePort
-        proxy_pass http://192.168.49.2:32196/;
+        proxy_pass http://192.168.49.2:38905/;
         proxy_set_header Host      $host;
     }
 }
@@ -74,3 +77,4 @@ spec:
 - https://digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
 - https://docs.microsoft.com/en-us/troubleshoot/developer/webapps/aspnetcore/practice-troubleshoot-linux/2-2-install-nginx-configure-it-reverse-proxy
 - https://www.linode.com/docs/guides/configure-firewall-with-ufw/
+- https://blog.csdn.net/puhaiyang/article/details/105949613
