@@ -17,6 +17,7 @@ public class ClientSample {
     configBuilder.withMasterUrl(Constants.MASTER_URL);
     Config config = configBuilder.build();
 
+
     try (KubernetesClient client = new DefaultKubernetesClient(config)) {
       final String namespace = Optional.ofNullable(client.getNamespace()).orElse("default");
 
