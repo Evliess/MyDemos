@@ -35,53 +35,53 @@
       <PatternLayout pattern="${LOG_PATTERN}"/>
     </console>
     <!-- debug日志文件输出日志信息 -->
-    <RollingFile name="Debug_File" fileName="${DEBUG_FILE_PATH_ING}" filePattern="${DEBUG_FILE_PATH_ED}">
-      <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-      <Policies>
-        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
-        <TimeBasedTriggeringPolicy/>
-      </Policies>
-      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>
-    </RollingFile>
+<!--    <RollingFile name="Debug_File" fileName="${DEBUG_FILE_PATH_ING}" filePattern="${DEBUG_FILE_PATH_ED}">-->
+<!--      <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
+<!--      <PatternLayout pattern="${LOG_PATTERN}"/>-->
+<!--      <Policies>-->
+<!--        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>-->
+<!--        <TimeBasedTriggeringPolicy/>-->
+<!--      </Policies>-->
+<!--      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>-->
+<!--    </RollingFile>-->
     <!-- info日志文件输出日志信息 -->
-    <RollingFile name="Info_File" fileName="${INFO_FILE_PATH_ING}" filePattern="${INFO_FILE_PATH_ED}">
-      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-      <Policies>
-        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
-        <TimeBasedTriggeringPolicy/>
-      </Policies>
-      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>
-    </RollingFile>
+<!--    <RollingFile name="Info_File" fileName="${INFO_FILE_PATH_ING}" filePattern="${INFO_FILE_PATH_ED}">-->
+<!--      <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
+<!--      <PatternLayout pattern="${LOG_PATTERN}"/>-->
+<!--      <Policies>-->
+<!--        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>-->
+<!--        <TimeBasedTriggeringPolicy/>-->
+<!--      </Policies>-->
+<!--      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>-->
+<!--    </RollingFile>-->
     <!-- warn日志文件输出日志信息 -->
-    <RollingFile name="Warn_File" fileName="${ERROR_FILE_PATH_ING}" filePattern="${ERROR_FILE_PATH_ED}">
-      <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-      <Policies>
-        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
-        <TimeBasedTriggeringPolicy/>
-      </Policies>
-      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>
-    </RollingFile>
+<!--    <RollingFile name="Warn_File" fileName="${ERROR_FILE_PATH_ING}" filePattern="${ERROR_FILE_PATH_ED}">-->
+<!--      <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>-->
+<!--      <PatternLayout pattern="${LOG_PATTERN}"/>-->
+<!--      <Policies>-->
+<!--        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>-->
+<!--        <TimeBasedTriggeringPolicy/>-->
+<!--      </Policies>-->
+<!--      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>-->
+<!--    </RollingFile>-->
     <!-- error日志文件输出日志信息 -->
-    <RollingFile name="Error_File" fileName="${ERROR_FILE_PATH_ING}" filePattern="${ERROR_FILE_PATH_ED}">
-      <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-      <Policies>
-        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>
-        <TimeBasedTriggeringPolicy/>
-      </Policies>
-      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>
-    </RollingFile>
+<!--    <RollingFile name="Error_File" fileName="${ERROR_FILE_PATH_ING}" filePattern="${ERROR_FILE_PATH_ED}">-->
+<!--      <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>-->
+<!--      <PatternLayout pattern="${LOG_PATTERN}"/>-->
+<!--      <Policies>-->
+<!--        <SizeBasedTriggeringPolicy size="${MAX_FILE_SIZE}"/>-->
+<!--        <TimeBasedTriggeringPolicy/>-->
+<!--      </Policies>-->
+<!--      <DefaultRolloverStrategy max="${MAX_FILE_NUM}"/>-->
+<!--    </RollingFile>-->
   </appenders>
   <!--配置总的日志监听级别-->
   <loggers>
     <root level="INFO">
       <appender-ref ref="Console_Log"/>
-      <appender-ref ref="Debug_File"/>
-      <appender-ref ref="Info_File"/>
-      <appender-ref ref="Error_File"/>
+<!--      <appender-ref ref="Debug_File"/>-->
+<!--      <appender-ref ref="Info_File"/>-->
+<!--      <appender-ref ref="Error_File"/>-->
     </root>
   </loggers>
 </Configuration>

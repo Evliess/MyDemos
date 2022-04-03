@@ -1,0 +1,9 @@
+kubectl apply -f - <<EOF
+apiVersion: "wait.play.com/v1"
+kind: Dummy
+metadata:
+  name: dummy-0402-1
+spec:
+  foo: "Hello"
+  bar: "Dummy"
+EOF

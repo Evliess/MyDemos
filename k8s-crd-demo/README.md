@@ -69,7 +69,40 @@ spec:
     args: ["sleep 10; touch /tmp/healthy; sleep 30000"]'
 ```
 
+
+
 ## Using a service account
+
+
+## Package a executable jar
+```
+mvn package -DskitTests
+```
+## Deploy
+
+1. Build and Push docker image
+```
+docker build -t operator-demo:1.0 .
+docker login -u waitplay
+docker tag operator-demo:1.0 waitplay/operator-demo:1.0.2
+docker push waitplay/operator-demo:1.0.2
+```
+2. Create service and clusterrole binding
+```
+kubectl apply dockerhub-secret.yaml
+kubectl apply sa.yaml
+kubectl clusterrolebinding.yaml
+```
+3. Deploy application
+
+```
+kubectl apply -f operator-deploy.yaml
+```
+4. Verify
+
+```
+kubectl get crd 
+```
 
 ## Reference links
 - https://cloud.tencent.com/developer/article/1877046

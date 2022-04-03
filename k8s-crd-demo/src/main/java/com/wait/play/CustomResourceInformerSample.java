@@ -1,6 +1,7 @@
 package com.wait.play;
 
 import com.wait.play.model.Dummy;
+import com.wait.play.model.DummySpec;
 import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.client.Config;
@@ -66,6 +67,10 @@ public class CustomResourceInformerSample {
 
       final Dummy toCreate = new Dummy();
       toCreate.getMetadata().setName("dummy");
+      DummySpec spec = new DummySpec();
+      spec.setFoo("Hello");
+      spec.setBar("Dummy");
+      toCreate.setSpec(spec);
       if (client.getConfiguration().getNamespace() != null) {
         toCreate.getMetadata().setNamespace(client.getConfiguration().getNamespace());
       } else if (client.getNamespace() != null) {

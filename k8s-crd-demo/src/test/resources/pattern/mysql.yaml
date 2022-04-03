@@ -2,17 +2,17 @@ kubectl apply -f - <<EOF
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: mysqls.wait.play.com
+  name: dummys.wait.play.com
 spec:
   group: wait.play.com
   scope: Namespaced
   names:
-    kind: MySQL
-    listKind: MySQLList
-    singular: mysql
-    plural: mysqls
+    kind: Dummy
+    listKind: DummyList
+    singular: dummy
+    plural: dummys
     shortNames:
-      - mysql
+      - dm
   versions:
     - name: v1
       served: true
@@ -43,9 +43,9 @@ EOF
   
 kubectl apply -f - <<EOF
 apiVersion: "wait.play.com/v1"
-kind: MySQL
+kind: Dummy
 metadata:
-  name: mysql
+  name: dummy-02
 spec:
   foo: my-awesome-foo
   bar: my-awesome-bar

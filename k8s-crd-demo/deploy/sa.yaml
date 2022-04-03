@@ -1,0 +1,9 @@
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: operator-sa
+  namespace: default
+imagePullSecrets:
+  - name: myregistrykey
+EOF

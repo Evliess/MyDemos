@@ -1,0 +1,23 @@
+  kubectl apply -f - <<EOF
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: operator-demo
+    labels:
+      app: operator-demo
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: operator-demo
+    template:
+      metadata:
+        labels:
+          app: operator-demo
+      spec:
+        containers:
+          - name: operator-demo
+            image: registry.hub.docker.com/waitplay/operator-demo:1.0.2
+            imagePullPolicy: Always
+        serviceAccountName: operator-sa
+EOF
