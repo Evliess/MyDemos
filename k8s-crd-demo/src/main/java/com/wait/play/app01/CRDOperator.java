@@ -2,12 +2,17 @@ package com.wait.play.app01;
 
 import com.wait.play.Constants;
 import com.wait.play.model.Dummy;
+import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.PodBuilder;
+import io.fabric8.kubernetes.api.model.PodList;
 import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinition;
 import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinitionList;
 import io.fabric8.kubernetes.api.model.apiextensions.v1.JSONSchemaPropsBuilder;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
 import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.dsl.NonNamespaceOperation;
+import io.fabric8.kubernetes.client.dsl.PodResource;
 import io.fabric8.kubernetes.client.dsl.base.CustomResourceDefinitionContext;
 import io.fabric8.kubernetes.client.informers.ResourceEventHandler;
 import io.fabric8.kubernetes.client.informers.SharedIndexInformer;
@@ -15,6 +20,7 @@ import io.fabric8.kubernetes.client.informers.SharedInformerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.concurrent.Executors;
 
 public class CRDOperator {
@@ -24,17 +30,36 @@ public class CRDOperator {
     final ConfigBuilder configBuilder = new ConfigBuilder();
     configBuilder.withMasterUrl(Constants.MASTER_URL);
     try {
-//      KubernetesClient client = new DefaultKubernetesClient(configBuilder.build());
-      KubernetesClient client = new DefaultKubernetesClient();
+      KubernetesClient client = new DefaultKubernetesClient(configBuilder.build());
+
+//      KubernetesClient client = new DefaultKubernetesClient();
       CRDOperator crdOperator = new CRDOperator();
       crdOperator.createCRD(client);
-      crdOperator.infomer(client);
+      crdOperator.informer(client);
     } catch (Exception e) {
       logger.error("Error!", e);
     }
   }
 
-  public void infomer(KubernetesClient client) {
+  private void createBusyboxPod(KubernetesClient client) {
+    Pod busybox = new PodBuilder().withApiVersion("v1")
+        .withNewMetadata()
+        .withName("busybox")
+        .withLabels(Collections.singletonMap("app", "busybox") )
+        .endMetadata()
+        .withNewSpec()
+        .addNewContainer()
+        .withName("busybox")
+        .withImage("busybox:latest")
+        .withArgs("/bin/sh", "-c", "sleep 10; touch /tmp/healthy; sleep 30000")
+        .endContainer()
+        .endSpec()
+        .build();
+    NonNamespaceOperation<Pod, PodList, PodResource<Pod>> pods = client.pods().inNamespace(Constants.NS_DEFAULT);
+    pods.create(busybox);
+  }
+
+  public void informer(KubernetesClient client) {
     SharedInformerFactory sharedInformerFactory = client.informers();
     SharedIndexInformer<Dummy> podInformer = sharedInformerFactory.sharedIndexInformerFor(Dummy.class, 60 * 1000L);
     logger.info("Informer factory initialized.");
@@ -43,6 +68,7 @@ public class CRDOperator {
           @Override
           public void onAdd(Dummy pod) {
             logger.info("{} dummy added", pod.getMetadata().getName());
+            createBusyboxPod(client);
           }
 
           @Override

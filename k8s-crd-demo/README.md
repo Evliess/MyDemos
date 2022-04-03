@@ -69,17 +69,12 @@ spec:
     args: ["sleep 10; touch /tmp/healthy; sleep 30000"]'
 ```
 
-
-
-## Using a service account
-
-
 ## Package a executable jar
 ```
 mvn package -DskitTests
 ```
-## Deploy
 
+## Deploy
 1. Build and Push docker image
 ```
 docker build -t operator-demo:1.0 .
