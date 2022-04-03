@@ -23,8 +23,6 @@ kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-serv
 
 #Generate ClusterIP
 minikube tunnel --cleanup &
-
-
 ```
 
 ## Use Nginx proxy NodeIP:port
@@ -52,7 +50,6 @@ server {
         proxy_set_header Host      $host;
     }
 }
-
 ```
 
 ## Create pod against k8s server API
