@@ -7,7 +7,6 @@ https://www.jianshu.com/p/62e4bfa949e4
 lsof -i
 ```
 
-
 ## Start minikube 
 ```
 minikube delete
