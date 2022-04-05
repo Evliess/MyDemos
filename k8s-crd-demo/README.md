@@ -105,3 +105,4 @@ kubectl get crd
 - https://docs.microsoft.com/en-us/troubleshoot/developer/webapps/aspnetcore/practice-troubleshoot-linux/2-2-install-nginx-configure-it-reverse-proxy
 - https://www.linode.com/docs/guides/configure-firewall-with-ufw/
 - https://blog.csdn.net/puhaiyang/article/details/105949613
+- https://www.ibm.com/docs/en/cloud-paks/cp-management/1.2.0?topic=kubectl-using-service-account-tokens-connect-api-server

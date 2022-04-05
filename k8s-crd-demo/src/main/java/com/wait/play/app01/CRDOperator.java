@@ -5,6 +5,7 @@ import com.wait.play.model.Dummy;
 import io.fabric8.kubernetes.api.model.Pod;
 import io.fabric8.kubernetes.api.model.PodBuilder;
 import io.fabric8.kubernetes.api.model.PodList;
+import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceColumnDefinition;
 import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinition;
 import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinitionList;
 import io.fabric8.kubernetes.api.model.apiextensions.v1.JSONSchemaPropsBuilder;
@@ -20,6 +21,8 @@ import io.fabric8.kubernetes.client.informers.SharedInformerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.concurrent.Executors;
 
@@ -34,7 +37,10 @@ public class CRDOperator {
 
 //      KubernetesClient client = new DefaultKubernetesClient();
       CRDOperator crdOperator = new CRDOperator();
-      crdOperator.createCRD(client);
+      // create crd directly
+//      crdOperator.createCRD(client);
+      // load crd from file
+      crdOperator.loadCRDFromFile(client);
       crdOperator.informer(client);
     } catch (Exception e) {
       logger.error("Error!", e);
@@ -45,7 +51,7 @@ public class CRDOperator {
     Pod busybox = new PodBuilder().withApiVersion("v1")
         .withNewMetadata()
         .withName("busybox")
-        .withLabels(Collections.singletonMap("app", "busybox") )
+        .withLabels(Collections.singletonMap("app", "busybox"))
         .endMetadata()
         .withNewSpec()
         .addNewContainer()
@@ -68,7 +74,7 @@ public class CRDOperator {
           @Override
           public void onAdd(Dummy pod) {
             logger.info("{} dummy added", pod.getMetadata().getName());
-            createBusyboxPod(client);
+//            createBusyboxPod(client);
           }
 
           @Override
@@ -101,6 +107,14 @@ public class CRDOperator {
         logger.warn("HAS_SYNCED_THREAD interrupted: {}", inEx.getMessage());
       }
     });
+  }
+
+  public void loadCRDFromFile(KubernetesClient client) throws FileNotFoundException {
+    CustomResourceDefinition aCustomResourceDefinition = client.apiextensions().v1().customResourceDefinitions()
+        .load(new FileInputStream("patterns/dummy-crd.yaml")).get();
+    logger.info("Creating CRD...");
+    client.apiextensions().v1().customResourceDefinitions().create(aCustomResourceDefinition);
+    logger.info("Created CRD...");
   }
 
   public void createCRD(KubernetesClient client) {
