@@ -1,3 +1,73 @@
+## CentOS
+
+1. Download and setup
+```
+firewall-cmd --state
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+```
+2. Set static ip
+
+vi /etc/sysconfig/network-scripts/ifcfg-ens33
+```
+TYPE=Ethernet
+PROXY_METHOD=none
+BROWSER_ONLY=no
+BOOTPROTO=static
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=ens33
+DEVICE=ens33
+ONBOOT=yes
+GATEWAY=192.168.112.2
+IPADDR=192.168.112.200
+NETMASK=255.255.255.0
+DNS1=192.168.112.2
+```
+
+3. Update yun repo
+- https://developer.aliyun.com/mirror/centos?spm=a2c6h.13651102.0.0.3e221b11qGawlj
+```
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+```
+4. Add a user
+```
+adduser jia
+passwd jia
+// add to sudo users
+
+```
+5. Add jia as sudo users
+- https://cloud.tencent.com/developer/article/1721167
+```
+chmod -v u+w /etc/sudoers
+vi /etc/sudoers
+
+## Allow root to run any commands anywher 
+root ALL=(ALL)  ALL 
+jia ALL=(ALL)  ALL #这个是新增的用户
+```
+6. Add user to docker group
+```
+sudo usermod -aG docker $USER && newgrp docker
+```
+7. Install kubectl on Linux
+- https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+- https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+```
+
 ## Ubuntu
 
 1. Download and setup
