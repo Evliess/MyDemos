@@ -40,8 +40,6 @@ curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos
 ```
 adduser jia
 passwd jia
-// add to sudo users
-
 ```
 5. Add jia as sudo users
 - https://cloud.tencent.com/developer/article/1721167
@@ -53,10 +51,13 @@ vi /etc/sudoers
 root ALL=(ALL)  ALL 
 jia ALL=(ALL)  ALL #这个是新增的用户
 ```
+
 6. Add user to docker group
 ```
 sudo usermod -aG docker $USER && newgrp docker
+systemctl enable docker.service
 ```
+
 7. Install kubectl on Linux
 - https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
@@ -66,6 +67,13 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 source <(kubectl completion bash)
 alias k=kubectl
 complete -F __start_kubectl k
+```
+
+8. Set default startup core
+```
+uname -r
+rpm -qa |grep kernel
+yum remove kernel-3.10.0-514.21.1.el7.x86_64
 ```
 
 ## Ubuntu
