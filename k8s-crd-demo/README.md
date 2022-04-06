@@ -1,10 +1,27 @@
 ## Ubuntu
+
+1. Download and setup
 ```
 # 安装Vm Tools
 https://blog.csdn.net/qq_34201858/article/details/108791068?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_aa&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_aa&utm_relevant_index=2
 https://www.jianshu.com/p/62e4bfa949e4
-
 lsof -i
+```
+2. Setup firewall
+```
+sudo ufw disable
+sudo systemctl status ufw
+sudo systemctl start ufw
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+```
+3. Setup vim
+
+```
+sudo vi /etc/vim/vimrc.tiny
+set nocompatible
+set backspace=2
+
 ```
 
 ## Start minikube 
@@ -25,17 +42,12 @@ minikube tunnel --cleanup &
 ```
 
 ## Use Nginx proxy NodeIP:port
+1. Restart nginx
 ```
-
 sudo /etc/init.d/nginx reload
 sudo systemctl restart nginx
-
-sudo systemctl status ufw
-sudo systemctl start ufw
-sudo ufw default allow outgoing
-sudo ufw default deny incoming
-
 ```
+
 2. sudo vi /etc/nginx/sites-enabled/default
 ```
 server {
@@ -105,3 +117,5 @@ kubectl get crd
 - https://www.linode.com/docs/guides/configure-firewall-with-ufw/
 - https://blog.csdn.net/puhaiyang/article/details/105949613
 - https://www.ibm.com/docs/en/cloud-paks/cp-management/1.2.0?topic=kubectl-using-service-account-tokens-connect-api-server
+- https://mirrors.aliyun.com/centos/7/isos/x86_64/
+- 
