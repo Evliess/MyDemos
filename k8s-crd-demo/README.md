@@ -185,6 +185,78 @@ kubectl apply -f operator-deploy.yaml
 kubectl get crd 
 ```
 
+## Using nginx
+
+> OS: Ubuntu 20.04.4
+
+1. Download http://nginx.org/en/CHANGES-1.18
+- http://nginx.org/download/nginx-1.18.0.tar.gz
+```
+curl -LO http://nginx.org/download/nginx-1.18.0.tar.gz
+sudo tar zxvf nginx-1.18.0.tar.gz
+```
+2. Compile and Install
+```
+sudo ./configure --prefix=/usr/app/nginx
+checking for OS
+ + Linux 5.4.0-107-generic x86_64
+checking for C compiler ... not found
+
+./configure: error: C compiler cc is not found
+
+./configure: error: the HTTP rewrite module requires the PCRE library.
+You can either disable the module by using --without-http_rewrite_module
+option, or install the PCRE library into the system, or build the PCRE library
+statically from the source with nginx by using --with-pcre=<path> option.
+
+sudo apt-get install gcc
+sudo apt-get install libpcre3
+sudo apt-get install libpcre3-dev
+sudo apt-get install zlib1g
+sudo apt-get install zlib1g-dev && sudo apt-get install make
+
+sudo ./configure --prefix=/usr/app/nginx
+sudo make && sudo make install
+```
+
+3. Setup firewall
+```
+sudo ufw disable
+sudo systemctl status ufw
+sudo systemctl start ufw
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+```
+4. Configure nginx system service
+
+```
+sudo vi /usr/lib/systemd/system/nginx.service
+
+[Unit]
+Description=nginx - web server After=network.target 
+remote-fs.target nss-lookup.target 
+
+[Service]
+
+Type=forking
+PIDFile=/usr/app/nginx/logs/nginx.pid
+ExecStartPre=/usr/app/nginx/sbin/nginx -t -c /usr/app/nginx/conf/nginx.conf 
+ExecStart=/usr/app/nginx/sbin/nginx -c /usr/app/nginx/conf/nginx.conf 
+ExecReload=/usr/app/nginx/sbin/nginx -s reload 
+ExecStop=/usr/app/nginx/sbin/nginx -s stop 
+ExecQuit=/usr/app/nginx/sbin/nginx -s quit 
+PrivateTmp=true 
+
+[Install] 
+WantedBy=multi-user.target 
+```
+5. Reload system service
+```
+sudo systemctl start nginx
+sudo systemctl reload nginx
+sudo systemctl enable nginx.service
+```
+
 ## Reference links
 - https://cloud.tencent.com/developer/article/1877046
 - https://kubernetes.io/docs/tasks/administer-cluster/access-cluster-api/
