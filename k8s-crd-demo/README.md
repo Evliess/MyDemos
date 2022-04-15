@@ -9,6 +9,8 @@ systemctl disable firewalld.service
 2. Set static ip
 
 vi /etc/sysconfig/network-scripts/ifcfg-ens33
+
+systemctl restart network
 ```
 TYPE=Ethernet
 PROXY_METHOD=none
