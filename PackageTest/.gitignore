@@ -2,3 +2,4 @@
 ${APP_LOG_ROOT}/
 logs/
 PackageTest.iml
+target
