@@ -19,6 +19,17 @@ curl -d 'key=hello' -d 'value=world' -X POST  http://localhost:9080/greeting
 curl http://localhost:9080/hello/hello
 ```
 
+## Enable https
+
+```shell
+#PKCS12
+#pwd 123456
+keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+
+#JKS -- deprecated
+keytool -genkey -alias liberty -storetype JKS -keyalg RSA -keysize 2048 -keystore keystore.jks -validity 3650
+```
+
 ## Package
 
 [spring-boot-assembly](https://github.com/geekidea/spring-boot-assembly)
