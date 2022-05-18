@@ -25,16 +25,32 @@ public class DP1 {
     }
   }
 
+  public int fib3(int n) {
+    if (n <= 1) {
+      return 1;
+    }
+    int[] pkg = new int[n + 1];
+    pkg[0] = 1;
+    pkg[1] = 1;
+    for (int j=2; j<=n; j++) {
+      pkg[j] = pkg[j-1] + pkg[j-2];
+    }
+    return pkg[n];
+  }
+
   @Test
   public void fib1_t() {
-    System.out.println(fib1(2));
+    int n = 40;
+    System.out.println(fib1(n));
+    System.out.println(fib3(n));
   }
 
   @Test
   public void fib2_t() {
-    int n = 2;
+    int n = 50;
     int memo[] = new int[n + 1];
-    System.out.println(fib2(memo, 2));
+    System.out.println(fib3(n));
+    System.out.println(fib2(memo, n));
   }
 
 }
