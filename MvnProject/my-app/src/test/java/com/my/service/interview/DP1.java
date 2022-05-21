@@ -18,6 +18,7 @@ public class DP1 {
   //备忘录的解法
   public int fib2(int memo[], int n) {
     if (n >= 2) {
+      if (memo[n] != 0) return memo[n];
       memo[n] = fib2(memo, n - 1) + fib2(memo, n - 2);
       return memo[n];
     } else {
@@ -32,8 +33,8 @@ public class DP1 {
     int[] pkg = new int[n + 1];
     pkg[0] = 1;
     pkg[1] = 1;
-    for (int j=2; j<=n; j++) {
-      pkg[j] = pkg[j-1] + pkg[j-2];
+    for (int j = 2; j <= n; j++) {
+      pkg[j] = pkg[j - 1] + pkg[j - 2];
     }
     return pkg[n];
   }
@@ -47,7 +48,7 @@ public class DP1 {
 
   @Test
   public void fib2_t() {
-    int n = 50;
+    int n = 40;
     int memo[] = new int[n + 1];
     System.out.println(fib3(n));
     System.out.println(fib2(memo, n));

@@ -15,6 +15,9 @@ public class DP2 {
     if (n <= 2) {
       return n;
     }
+    if (pkg[n] != 0) {
+      return pkg[n];
+    }
     pkg[n] = jump(n - 1, pkg) + jump(n - 2, pkg);
     return pkg[n];
   }
@@ -35,10 +38,10 @@ public class DP2 {
 
   @Test
   public void test() {
-    int n = 7;
+    int n = 40;
     int pkg[] = new int[n + 1];
     System.out.println(jump(n, pkg) + "");
-    System.out.println(jump2(n) + "");
+//    System.out.println(jump2(n) + "");
 
   }
 
