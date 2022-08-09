@@ -1,4 +1,4 @@
-package com.my.service.dp;
+package com.my.service.dp.abstractfactory;
 
 
 import org.junit.Test;

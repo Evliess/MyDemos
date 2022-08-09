@@ -1,4 +1,4 @@
-package com.my.service.dp;
+package com.my.service.dp.singleton;
 
 public class SingletonDemo_2 {
 

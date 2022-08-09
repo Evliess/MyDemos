@@ -1,4 +1,4 @@
-package com.my.service.dp;
+package com.my.service.dp.template;
 
 import org.junit.Test;
 import org.slf4j.Logger;
