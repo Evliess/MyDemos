@@ -112,7 +112,7 @@ public class DS4 {
   private int getBasePos(int[] array, int left, int right) {
     int key = array[left];
     int i = left;
-    int j = right;
+    int j = right; 
     int tmp;
     while (i < j) {
       //find the ele < key
