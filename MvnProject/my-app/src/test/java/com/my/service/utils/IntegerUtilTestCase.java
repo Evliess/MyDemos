@@ -2,6 +2,7 @@ package com.my.service.utils;
 
 import org.junit.Test;
 
+// https://www.cnblogs.com/twoheads/p/9635309.html
 public class IntegerUtilTestCase {
 
   /** high-16 bit -- read
