@@ -5,8 +5,10 @@ public class Client {
     Message message = new TextMessage("The world is big!");
     System.out.println(message.getContent());
 
-
     Message decorator = new HtmlEncodeMessage(message);
     System.out.println(decorator.getContent());
+
+    Message base64 = new Base64EncoderMessage(decorator);
+    System.out.println(base64.getContent());
   }
 }
