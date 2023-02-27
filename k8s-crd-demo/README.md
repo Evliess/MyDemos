@@ -104,6 +104,13 @@ set backspace=2
 
 ```
 
+4. Setup share folder with host
+
+```bash
+cd ~
+sudo vmhgfs-fuse .host:/ /mnt/ -o nonempty -o allow_other
+```
+
 ## Start minikube 
 ```
 minikube delete
