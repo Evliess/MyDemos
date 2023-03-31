@@ -104,6 +104,13 @@ set backspace=2
 
 ```
 
+4. Setup share folder with host
+
+```bash
+cd ~
+sudo vmhgfs-fuse .host:/ /mnt/ -o nonempty -o allow_other
+```
+
 ## Start minikube 
 ```
 minikube delete
@@ -113,6 +120,8 @@ minikube start
 #Must enable --disable-filter=true
 #Expose k8s api server
 kubectl proxy --address='0.0.0.0' --accept-hosts='^*$' --disable-filter=true &
+#Expose kubedashboard
+kubectl proxy --port=9080 --address='0.0.0.0' --accept-hosts='^*$' --disable-filter=true &
 
 #Expose service
 kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-service
