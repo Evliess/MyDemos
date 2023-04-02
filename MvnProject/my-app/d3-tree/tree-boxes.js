@@ -308,8 +308,8 @@ function treeBoxes(urlService, jsonData) {
 				d3.select(this).attr('marker-end', 'url(#end-arrow)');
 				d3.select(this).attr('marker-start', linkMarkerStart(d.target.data.link.direction, false));
 				d3.select(this).attr('class', 'link');
-				$('#tooltipLinkID' + d.target.id).css('visibility', 'hidden');
-				$('#tooltipLinkTextID' + d.target.id).css('visibility', 'hidden');
+				$('#tooltipLinkID' + d.id).css('visibility', 'hidden');
+				$('#tooltipLinkTextID' + d.id).css('visibility', 'hidden');
 			});
 
 		linkTooltip.enter().append('rect')
