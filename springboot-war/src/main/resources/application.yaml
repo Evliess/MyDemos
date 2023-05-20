@@ -3,6 +3,13 @@ server.ssl.key-store-type: PKCS12
 server.ssl.key-store: classpath:server.p12
 server.ssl.key-store-password: changeit
 
-server.ssl.client-auth: need
-server.ssl.trust-store: classpath:server-truststore.p12
-server.ssl.trust-store-password: changeit
+#server.ssl.client-auth: need
+#server.ssl.trust-store: classpath:server-truststore.p12
+#server.ssl.trust-store-password: changeit
+
+spring:
+  application:
+    name: custom-metrics
+management.server.port: 8443
+management.endpoints.web.exposure.include: "*"
+management.metrics.tags.application: ${spring.application.name}
