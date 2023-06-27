@@ -52,4 +52,6 @@ prompt
 2. 我想要你xxx，我应该给你输入什么信息
 3. 直接下指令，请推荐，请翻译，请总结，请润色，请直接写代码
 
+角色：你是一名经验丰富的java工程师，elasticsearch数据库专家。问题：我在使用RestHighLevelClient从elasticsearch查找数据超过10000条记录时，java程序抛出OOM异常，我不想增加内存的方式解决。请你向我推荐其他可行的解决方案
+
 
