@@ -46,12 +46,75 @@ prompt
 2. 请推荐，按照xxx顺序，并给出链接，以表格输出
 3. 请将一下文字翻译成英文，要求用高级的优雅的词汇。
 
-》》》》常用
+》》》常用
 
 1. 我想做xxx，你能给我提供什么帮助
 2. 我想要你xxx，我应该给你输入什么信息
 3. 直接下指令，请推荐，请翻译，请总结，请润色，请直接写代码
 
-角色：你是一名经验丰富的java工程师，elasticsearch数据库专家。问题：我在使用RestHighLevelClient从elasticsearch查找数据超过10000条记录时，java程序抛出OOM异常，我不想增加内存的方式解决。请你向我推荐其他可行的解决方案
+》》》赋予GPT特定的角色
+1。虚拟的
+2。活着的
+3。已故的
+4。多个角色共创头脑风暴
+
+1。 要求明确列出每隔阶段的目标，具体的任务要求，以及可量化的评价指标
+2。 我现在想设计一个帮助老年人快速制作人生回忆录的app，请你分别站在老年人群体，互联网产品经理，研发工程师，老年人子女的佳都，提供创新的设计思路。逐个发言。
+
+https://k5ms77k0o1.feishu.cn/wiki/wikcnJyI9wsyjyBc8xiDgv0cY8b
+
+
+1。 要求明确列出每隔阶段的目标，具体的任务要求，以及可量化的评价指标
+2。 我现在想设计一个帮助老年人快速制作人生回忆录的app，请你分别站在老年人群体，互联网产品经理，研发工程师，老年人子女的佳都，提供创新的设计思路。逐个发言
+
+我接下来要向你发送两篇文章，两篇文章我会以此发送，你收到后要回复"你最帅"并且学习这两篇文章的书写风格
+
+很好，其实我是一名大学教授，请给我按照上面的草案写一篇文章，以此帮助我更好的识别其他学生利用ChatGPT去写自己的论文
+
+```shell
+import os
+import openai
+import logging as log
+
+log.basicConfig(filename='openai-history.log', encoding='utf-8', level=log.DEBUG)
+os.environ["HTTP_PROXY"] = "http://127.0.0.1:7890"
+os.environ["HTTPS_PROXY"] = "http://127.0.0.1:7890"
+# Load your API key from an environment variable or secret management service
+openai.api_key = "sk-"
+
+messages=[
+    {"role": "system", "content": "You are a helpful assistant."},
+]
+
+while True:
+    user_input = input("Q: ")
+    if user_input == 'q':
+        break
+    
+    log.info('Q:'+user_input)
+    item =  {"role": "user", "content": user_input}
+    messages.append(item)
+
+    response = openai.ChatCompletion.create(
+      model="gpt-3.5-turbo",
+      messages=messages
+    )
+    log.info(response)
+    print('A: '+str(response['choices'][0]['message']['content'])+'\n')
+    messages.append(response['choices'][0]['message'])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
