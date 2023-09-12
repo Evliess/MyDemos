@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: git-clone-taskrun-
+spec:
+  taskRef:
+    name: git-clone
+  workspaces:
+    - name: output
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Mi
+#    - name: ssh-directory
+#      secret:
+#        secretName: my-ssh-credentials
+  params:
+    - name: repo-url
+      value: https://github.com/Evliess/image-syncer.git

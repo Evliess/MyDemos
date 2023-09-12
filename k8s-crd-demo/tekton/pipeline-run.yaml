@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: git-clone-pipeline-run-
+spec:
+  pipelineRef:
+    name: git-clone
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
+  workspaces:
+    - name: shared-data
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Mi
+#    - name: ssh-creds
+#      secret:
+#        secretName: my-ssh-credentials
+  params:
+    - name: repo-url
+      value: https://github.com/Evliess/image-syncer.git
