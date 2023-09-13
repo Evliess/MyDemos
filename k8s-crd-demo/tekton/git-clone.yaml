@@ -38,6 +38,7 @@ spec:
   steps:
     - name: clone
       image: waitplay/tektoncd-pipeline-cmd-git-init:latest
+      imagePullPolicy: IfNotPresent
       script: |
         CHECKOUT_DIR="$(workspaces.output.path)/$(params.subdirectory)"
         

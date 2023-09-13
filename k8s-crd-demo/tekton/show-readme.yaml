@@ -8,8 +8,9 @@ spec:
     - name: source
   steps:
     - name: read
-      image: alpine:latest
+      image: alpine:3.18.3
+      imagePullPolicy: IfNotPresent
       script: |
-        #!/usr/bin/env sh
+        #!/bin/sh
         ls -la $(workspaces.source.path)
         cat $(workspaces.source.path)/src/README.md
