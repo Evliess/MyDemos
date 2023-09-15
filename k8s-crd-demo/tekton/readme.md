@@ -36,7 +36,11 @@ http://192.168.0.222:8001/api/v1/namespaces/tekton-pipelines/services/tekton-das
 
 #stop kubectl proxy
 ps -ef | grep kubectl
-kill -9 
+kill -9
+
+kubectl port-forward service/el-hello-listener 8080
+
+export all_proxy=http://192.168.0.105:7890
 ```
 
 
@@ -73,10 +77,7 @@ EOF
 
 ### Send an event
 ```
-curl -v \
-   -H 'content-Type: application/json' \
-   -d '{"username": "Tekton123"}' \
-   http://localhost:8080
+curl -v -H 'content-Type: application/json' -d '{"username": "Tekton123"}' http://localhost:8080
 ```
 
 ## References

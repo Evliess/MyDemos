@@ -5,4 +5,5 @@ metadata:
 spec:
   params:
     - name: username
-      value: $(body.username)
+      # $(extensions.username) come from the cel interceptor overlays
+      value: "$(extensions.username) -- $(body.username)"
