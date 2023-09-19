@@ -9,6 +9,29 @@
 
 ## Installation
 
+### Extract Images
+ 
+```shell
+curl -L  https://storage.googleapis.com/tekton-releases/pipeline/latest/release.yaml -o TektonCD-Pipelines.yaml
+DOCKER_USERHUB=waitplay/tektoncd-pipeline-
+grep "image: " TektonCD-Pipelines.yaml | cut -f 2,3 -d ":" | cut -f 1 -d "@" > TektonCD-Pipelines-image.txt
+grep "git-image" TektonCD-Pipelines.yaml | sed -e "s#,#\n#g" -e 's/"//g' | grep "gcr.io" | cut -f 1 -d "@" >> TektonCD-Pipelines-image.txt
+for i in `cat TektonCD-Pipelines-image.txt`;do
+  echo  skopeo copy --all docker://${i} docker://${DOCKER_USERHUB}${i##*/}
+  sed -i "s#${i}#${DOCKER_USERHUB}${i##*/}#g" TektonCD-Pipelines.yaml
+done
+```
+
+```shell
+DOCKER_USERHUB=waitplay/tektoncd-pipeline-
+grep "image: " trigger-release.yaml | cut -f 2,3 -d ":" | cut -f 1 -d "@" > trigger-release.yaml.txt
+grep "git-image" trigger-release.yaml | sed -e "s#,#\n#g" -e 's/"//g' | grep "gcr.io" | cut -f 1 -d "@" >> trigger-release.txt
+for i in `cat trigger-release.yaml.txt`;do
+  echo  skopeo copy --all docker://${i} docker://${DOCKER_USERHUB}${i##*/}
+  sed -i "s#${i}#${DOCKER_USERHUB}${i##*/}#g" trigger-release.yaml
+done
+```
+
 ```
 curl -k https://raw.githubusercontent.com/drriguz/knative-dockerhub-mirror/master/output/tektoncd-pipeline-v0.47.3-release.yaml -o tektoncd-pipeline-v0.47.3-release.yaml
 curl -k https://raw.githubusercontent.com/drriguz/knative-dockerhub-mirror/master/output/tektoncd-dashboard-v0.37.0-release.yaml -o tektoncd-dashboard-v0.37.0-release.yaml
@@ -86,3 +109,4 @@ curl -v -H 'content-Type: application/json' -d '{"username": "Tekton123"}' http:
 - https://developer.ibm.com/tutorials/build-and-deploy-a-docker-image-on-kubernetes-using-tekton-pipelines/
 - https://github.com/drriguz/knative-dockerhub-mirror/blob/master/releases.txt
 - https://zhuanlan.zhihu.com/p/562869904
+- https://mp.weixin.qq.com/s/cMzgur6KE6XdswvUWhyJUA
