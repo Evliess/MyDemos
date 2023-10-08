@@ -334,4 +334,6 @@ ETCDCTL_API=3 etcdctl snapshot restore /tmp/etcd-backup.db \
 
 ### references
 - https://mp.weixin.qq.com/s/SxmitpMMu6a91d3NqD5adQ
+- https://minikube.sigs.k8s.io/docs/commands/addons/
+- https://minikube.sigs.k8s.io/docs/tutorials/volume_snapshots_and_csi/
 

@@ -279,4 +279,3 @@ sudo systemctl enable nginx.service
 - https://blog.csdn.net/puhaiyang/article/details/105949613
 - https://www.ibm.com/docs/en/cloud-paks/cp-management/1.2.0?topic=kubectl-using-service-account-tokens-connect-api-server
 - https://mirrors.aliyun.com/centos/7/isos/x86_64/
-- 
