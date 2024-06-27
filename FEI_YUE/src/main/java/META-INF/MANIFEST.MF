@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Main-Class: com.example.fei_yue.HelloApplication
+Class-Path: ikonli-javafx-12.3.0.jar javafx-graphics-17.0.1.jar javafx-m
+ edia-17.0.1.jar javafx-media-17.0.1-mac.jar javafx-controls-17.0.1-mac.
+ jar javafx-base-17.0.1.jar formsfx-core-11.3.2.jar javafx-fxml-17.0.1.j
+ ar javafx-web-17.0.1.jar javafx-fxml-17.0.1-mac.jar controlsfx-11.1.1.j
+ ar javafx-graphics-17.0.1-mac.jar bootstrapfx-core-0.4.0.jar javafx-web
+ -17.0.1-mac.jar tilesfx-11.48.jar ikonli-core-12.3.0.jar validatorfx-0.
+ 2.1.jar javafx-controls-17.0.1.jar javafx-base-17.0.1-mac.jar
+
