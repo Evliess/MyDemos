@@ -6,16 +6,17 @@ public class HuiYuan {
   private String phone;
   private Double amount;
   private String chargeDate;
-  private Integer timeLeft;
-  private String auditLog;
+  private String leftTime;
+  private String score;
 
-  public String getAuditLog() {
-    return auditLog;
+  public String getScore() {
+    return score;
   }
 
-  public void setAuditLog(String auditLog) {
-    this.auditLog = auditLog;
+  public void setScore(String score) {
+    this.score = score;
   }
+
 
   public int getId() {
     return id;
@@ -57,22 +58,23 @@ public class HuiYuan {
     this.chargeDate = chargeDate;
   }
 
-  public Integer getTimeLeft() {
-    return timeLeft;
+  public String getLeftTime() {
+    return leftTime;
   }
 
-  public void setTimeLeft(Integer timeLeft) {
-    this.timeLeft = timeLeft;
+  public void setLeftTime(String leftTime) {
+    this.leftTime = leftTime;
   }
 
   @Override
   public String toString() {
     return "HuiYuan{" +
-        "name='" + name + '\'' +
-        ", phone='" + phone + '\'' +
-        ", amount=" + amount +
-        ", chargeDate='" + chargeDate + '\'' +
-        ", timeLeft=" + timeLeft +
-        '}';
+            "name='" + name + '\'' +
+            ", phone='" + phone + '\'' +
+            ", amount=" + amount +
+            ", chargeDate='" + chargeDate + '\'' +
+            ", leftTime='" + leftTime + '\'' +
+            ", score='" + score + '\'' +
+            '}';
   }
 }

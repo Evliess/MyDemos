@@ -95,7 +95,7 @@ public class EditHYPane {
       AppConstants.addHY.setName(inputName.getText());
       AppConstants.addHY.setAmount(Double.valueOf(inputAmount.getText()));
       AppConstants.addHY.setChargeDate(inputChargeDate.getText());
-      AppConstants.addHY.setTimeLeft(Integer.getInteger(inputTimeLeft.getText()));
+      AppConstants.addHY.setLeftTime(inputTimeLeft.getText());
     }
   }
 }

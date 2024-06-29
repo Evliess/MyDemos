@@ -89,7 +89,7 @@ public class AddHYPane {
       tmp.setName(inputName.getText());
       tmp.setAmount(Double.valueOf(inputAmount.getText()));
       tmp.setChargeDate(inputChargeDate.getText());
-      tmp.setTimeLeft(Integer.valueOf(inputTimeLeft.getText()));
+      tmp.setLeftTime(inputTimeLeft.getText());
     }
     return tmp;
   }

@@ -15,6 +15,10 @@ public class AppConstants {
   public static String ALERT_HEAD = "警告";
   public static String ALERT_ADD_HY = "会员信息不能为空！";
   public static String ALERT_ADD_HY_CONFIRM = "再次确认信息！";
+  public static String ALERT_UPDATE_HY_CONFIRM = "会员不存在，请确认手机号！";
+  public static Integer SQL_RESULT_0 = 0;
+  public static Integer SQL_RESULT_1 = 1;
+  public static String DB_PATH = "C:/Users/jia/Documents/db/feiyue";
 
   public static HuiYuan addHY = new HuiYuan();
 }

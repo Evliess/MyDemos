@@ -10,7 +10,8 @@
   requires org.kordamp.bootstrapfx.core;
   requires eu.hansolo.tilesfx;
    requires fastjson;
+     requires java.sql;
 
-   opens com.example.fei_yue to javafx.fxml;
+     opens com.example.fei_yue to javafx.fxml;
   exports com.example.fei_yue;
 }
