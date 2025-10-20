@@ -28,8 +28,12 @@ jobs:
         ls -lha
         # 构建项目
         npm install --verbose
+        cat > config.js << EOF
+        ${{ secrets.CONFIG_JS }}
+        EOF
         yarn run build
         echo "Build is done!"
+        ls -lha
     
     - name: Upload distribution
       uses: actions/upload-artifact@v4
