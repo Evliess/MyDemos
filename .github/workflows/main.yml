@@ -28,10 +28,6 @@ jobs:
         cd external-towxml
         npm install
         
-        # 将外部 UI 库的资源复制到项目中
-        mkdir -p public/towxml
-        cp -r external-towxml/dist/* public/towxml/
-        
         # 构建项目
         npm run build
         echo "构建完成！"
