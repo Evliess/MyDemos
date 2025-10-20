@@ -10,9 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout main repo
-      uses: actions/checkout@v4
-    
     - name: Clone UI component library
       run: |
         # 克隆一个公开的 UI 库，例如 Bootstrap
