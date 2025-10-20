@@ -26,11 +26,11 @@ jobs:
       run: |
         ls -lha
         cd external-towxml
-        npm install
-        
+        npm install -g
+        ls -lha
         # 构建项目
-        npm run build
-        echo "构建完成！"
+        yarn run build
+        echo "Build is done!"
     
     - name: Upload distribution
       uses: actions/upload-artifact@v4
