@@ -27,6 +27,7 @@ jobs:
     
     - name: Install and build
       run: |
+        ls -lha
         npm install
         
         # 将外部 UI 库的资源复制到项目中
