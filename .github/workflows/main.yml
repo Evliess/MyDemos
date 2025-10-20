@@ -27,7 +27,7 @@ jobs:
         cd external-towxml
         ls -lha
         # 构建项目
-        npm install
+        npm install --verbose
         yarn run build
         echo "Build is done!"
     
