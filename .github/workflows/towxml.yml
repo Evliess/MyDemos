@@ -38,5 +38,5 @@ jobs:
     - name: Upload distribution
       uses: actions/upload-artifact@v4
       with:
-        name: website-with-towxml
+        name: towxml
         path: /home/runner/work/MyDemos/MyDemos/external-towxml/dist/
